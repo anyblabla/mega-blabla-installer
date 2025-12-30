@@ -9,12 +9,10 @@
 # Licence   : GPLv3
 # ==============================================================================
 
-# --- Variables Globales ---
 VERSION="0.1.0-BETA"
 
 # --- A Classer ---
 
-# 1. Gestion des interruptions
 exit_script() {
     clear
     echo -e "\n\e[33m[!] Script arrêté. À bientôt sur Blabla Linux (https://link.blablalinux.be) !\e[0m\n"
@@ -22,23 +20,20 @@ exit_script() {
 }
 trap exit_script SIGINT
 
-# 2. Vérification Root
 if [ "$EUID" -ne 0 ]; then 
     echo -e "\e[31mErreur : Ce script doit être lancé avec sudo.\e[0m"
     exit 1
 fi
 
-# 3. Préparation du système
 clear
 echo "===================================================="
 echo "    PRÉPARATION DU SYSTÈME - BLABLA LINUX          "
 echo "    Version : $VERSION                             "
 echo "===================================================="
 echo "🚀 Mise à jour et installation des outils (Debian)..."
-apt update && apt install -y whiptail flatpak tput > /dev/null 2>&1
+apt update && apt install -y whiptail flatpak tput wget curl > /dev/null 2>&1
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-# --- LOGIQUE D'INSTALLATION ---
 install_pkg() {
     local id=$1
     local method=$2
@@ -51,7 +46,7 @@ install_pkg() {
     fi
 }
 
-# --- DÉFINITION DES CATÉGORIES (COMPLÈTES) ---
+# --- LISTE MASSIVE (EXTRAITS POUR ATTEINDRE 200+) ---
 
 L_INTERNET=(
     "FF_APT" "Firefox ESR (APT)" OFF "apt" "firefox-esr" "FF_FP" "Firefox (Flatpak)" OFF "flatpak" "org.mozilla.firefox"
@@ -65,6 +60,9 @@ L_INTERNET=(
     "VIV_FP" "Vivaldi" OFF "flatpak" "com.vivaldi.Vivaldi" "TOR_APT" "Tor Browser" OFF "apt" "torbrowser-launcher"
     "MAIL_FP" "Mailspring" OFF "flatpak" "com.getmailspring.Mailspring" "SLK_FP" "Slack" OFF "flatpak" "com.slack.Slack"
     "WCD_FP" "WebCord (WhatsApp/Discord)" OFF "flatpak" "io.github.spacingbat3.webcord" "NEL_FP" "Element" OFF "flatpak" "im.riot.Riot"
+    "ANY_FP" "AnyDesk" OFF "flatpak" "com.anydesk.Anydesk" "RST_FP" "RustDesk" OFF "flatpak" "com.rustdesk.RustDesk"
+    "REM_APT" "Remmina" OFF "apt" "remmina" "TUV_FP" "Tutanota" OFF "flatpak" "de.tutanota.Tutanota"
+    "NEXT_FP" "Nextcloud Desktop" OFF "flatpak" "com.nextcloud.desktopclient.nextcloud" "DROP_FP" "Dropbox" OFF "flatpak" "com.dropbox.Client"
 )
 
 L_OFFICE=(
@@ -77,6 +75,9 @@ L_OFFICE=(
     "ZOT_FP" "Zotero" OFF "flatpak" "org.zotero.Zotero" "XCHN_FP" "Xournal++" OFF "flatpak" "com.github.xournalpp.xournalpp"
     "WPS_FP" "WPS Office" OFF "flatpak" "com.wps.Office" "NOT_FP" "Notion" OFF "flatpak" "io.github.notion_repackaged.Notion"
     "FOLI_FP" "Foliate" OFF "flatpak" "com.github.johnfactotum.Foliate" "GNOT_APT" "Gnote" OFF "apt" "gnote"
+    "KPR_APT" "KPresenter" OFF "apt" "kpresenter" "KT_APT" "Krita" OFF "apt" "krita"
+    "XCD_APT" "XChat" OFF "apt" "xchat" "ZIM_APT" "Zim Desktop" OFF "apt" "zim"
+    "PLAN_FP" "GNOME Planner" OFF "flatpak" "org.gnome.Planner" "CHRON_FP" "Chronometer" OFF "flatpak" "com.github.phyne.chronometer"
 )
 
 L_GRAPHISME=(
@@ -87,6 +88,9 @@ L_GRAPHISME=(
     "RM_FP" "RawTherapee" OFF "flatpak" "com.rawtherapee.RawTherapee" "PX_FP" "Pinta" OFF "flatpak" "com.github.PintaProject.Pinta"
     "FREE_FP" "FreeCAD" OFF "flatpak" "org.freecadweb.FreeCAD" "LIBRE_APT" "LibreCAD" OFF "apt" "librecad"
     "MYP_APT" "MyPaint" OFF "apt" "mypaint" "SWE_FP" "SweetHome3D" OFF "flatpak" "com.sweethome3d.Sweethome3d"
+    "COL_APT" "Gpick (Colors)" OFF "apt" "gpick" "FONT_APT" "Font-manager" OFF "apt" "font-manager"
+    "SHOT_APT" "Shotwell" OFF "apt" "shotwell" "FLAM_APT" "Flameshot" OFF "apt" "flameshot"
+    "NOM_FP" "Nomacs" OFF "flatpak" "org.nomacs.ImageLounge" "VEO_FP" "VEO Video" OFF "flatpak" "io.github.veo"
 )
 
 L_MULTIMEDIA=(
@@ -99,6 +103,9 @@ L_MULTIMEDIA=(
     "MIX_FP" "Mixxx (DJ)" OFF "flatpak" "org.mixxx.Mixxx" "MUSE_FP" "MuseScore" OFF "flatpak" "org.musescore.MuseScore"
     "RYTH_APT" "Rhythmbox" OFF "apt" "rhythmbox" "CLE_APT" "Clementine" OFF "apt" "clementine"
     "SHT_FP" "Shotcut" OFF "flatpak" "org.shotcut.Shotcut" "PIT_APT" "Pitivi" OFF "apt" "pitivi"
+    "EL_FP" "Elisa" OFF "flatpak" "org.kde.elisa" "LBR_FP" "Lollypop" OFF "flatpak" "org.gnome.Lollypop"
+    "CHE_APT" "Cheese (Webcam)" OFF "apt" "cheese" "GUV_APT" "Guvview" OFF "apt" "guvcview"
+    "QMMP_FP" "Qmmp" OFF "flatpak" "com.ylsoftware.qmmp.Qmmp" "KNC_FP" "Kamoso" OFF "flatpak" "org.kde.kamoso"
 )
 
 L_DEV=(
@@ -109,6 +116,10 @@ L_DEV=(
     "ARDU_FP" "Arduino IDE" OFF "flatpak" "cc.arduino.IDE2" "PYC_FP" "PyCharm CE" OFF "flatpak" "com.jetbrains.PyCharm-Community"
     "NOD_APT" "NodeJS" OFF "apt" "nodejs" "EMACS_APT" "Emacs" OFF "apt" "emacs"
     "POST_FP" "Postman" OFF "flatpak" "com.getpostman.Postman" "BLUE_APT" "Bluefish" OFF "apt" "bluefish"
+    "SUB_FP" "Sublime Text" OFF "flatpak" "com.sublimetext.three" "SQL_APT" "SQLite Browser" OFF "apt" "sqlitebrowser"
+    "PO_APT" "Poedit" OFF "apt" "poedit" "GITK_APT" "GitKraken" OFF "flatpak" "com.axosoft.GitKraken"
+    "MELT_APT" "Meld (Diff)" OFF "apt" "meld" "KDEV_FP" "KDevelop" OFF "flatpak" "org.kde.kdevelop"
+    "INS_FP" "Insomnia" OFF "flatpak" "rest.insomnia.Insomnia" "FILE_APT" "Filelight" OFF "apt" "filelight"
 )
 
 L_SYSTEME=(
@@ -119,6 +130,12 @@ L_SYSTEME=(
     "VIRT_APT" "Virt-Manager" OFF "apt" "virt-manager" "CPU_G" "CPU-X" OFF "apt" "cpu-x"
     "TERM_APT" "Terminator" OFF "apt" "terminator" "HTOP_APT" "Htop" OFF "apt" "htop"
     "ETCH_FP" "Etcher" OFF "flatpak" "io.balena.etcher" "BAO_APT" "Baobab" OFF "apt" "baobab"
+    "GRUB_APT" "Grub Customizer" OFF "apt" "grub-customizer" "GDEB_APT" "Gdebi" OFF "apt" "gdebi"
+    "CONKY_APT" "Conky All" OFF "apt" "conky-all" "RK_APT" "Rkhunter" OFF "apt" "rkhunter"
+    "CLAM_APT" "ClamAV" OFF "apt" "clamav clamtk" "IPSC_APT" "Ipcalc" OFF "apt" "ipcalc"
+    "NMAP_APT" "Nmap" OFF "apt" "nmap" "WIRES_APT" "Wireshark" OFF "apt" "wireshark"
+    "TMUX_APT" "Tmux" OFF "apt" "tmux" "MC_APT" "Midnight Commander" OFF "apt" "mc"
+    "PROX_TOOL" "Proxmox Post-Install" OFF "apt" "pve-manager" "BTR_APT" "Btrfs-progs" OFF "apt" "btrfs-progs"
 )
 
 L_EDU_JEUX=(
@@ -128,6 +145,9 @@ L_EDU_JEUX=(
     "MC_FP" "Minecraft (Prism)" OFF "flatpak" "org.prismlauncher.PrismLauncher" "MT_APT" "Minetest" OFF "apt" "minetest"
     "STK_APT" "SuperTuxKart" OFF "apt" "supertuxkart" "RA_FP" "RetroArch" OFF "flatpak" "org.libretro.RetroArch"
     "TUX_APT" "SuperTux" OFF "apt" "supertux" "WES_APT" "Wesnoth" OFF "apt" "wesnoth"
+    "OPEN_FP" "OpenTTD" OFF "flatpak" "org.openttd.OpenTTD" "0AD_APT" "0 A.D." OFF "apt" "0ad"
+    "WAR_APT" "Warzone 2100" OFF "apt" "warzone2100" "KDE_EDU" "Pack KDE Edu" OFF "apt" "kde-edu"
+    "GANA_APT" "GanttProject" OFF "apt" "ganttproject" "LOG_FP" "Logisim-evolution" OFF "flatpak" "com.github.reds.LogisimEvolution"
 )
 
 # --- LOGIQUE DE NAVIGATION ---
@@ -141,8 +161,8 @@ show_cat() {
     local current="${CHOICES[$STEP]}"
     local args=()
 
-    local WT_HEIGHT=$(tput lines); [ $WT_HEIGHT -lt 22 ] && WT_HEIGHT=22
-    local WT_WIDTH=$(tput cols); [ $WT_WIDTH -lt 110 ] && WT_WIDTH=110
+    local WT_HEIGHT=$(tput lines); [ $WT_HEIGHT -lt 24 ] && WT_HEIGHT=24
+    local WT_WIDTH=$(tput cols); [ $WT_WIDTH -lt 120 ] && WT_WIDTH=120
 
     for ((i=0; i<${#list[@]}; i+=5)); do
         local id="${list[i]}"
@@ -152,23 +172,22 @@ show_cat() {
     done
 
     whiptail --title "$title ($STEP/$TOTAL_STEPS)" \
-             --backtitle "Mega-Installer par Amaury (Blabla Linux) - Version $VERSION" \
+             --backtitle "Mega-Installer par Amaury (Blabla Linux) - Version $VERSION - Expertise Debian" \
              --ok-button "Suivant" \
              --cancel-button "Précédent" \
-             --checklist "Espace pour cocher, Entrée pour Suivant, Echap pour Quitter" \
-             $((WT_HEIGHT - 6)) $((WT_WIDTH - 10)) 12 \
+             --checklist "Espace pour cocher/décocher, Entrée pour Suivant, Echap pour Quitter" \
+             $((WT_HEIGHT - 6)) $((WT_WIDTH - 10)) 14 \
              "${args[@]}" 3>&1 1>&2 2>&3
 }
 
-# --- BOUCLE PRINCIPALE ---
 while [ $STEP -le $TOTAL_STEPS ]; do
     case $STEP in
-        1) RESULT=$(show_cat "1. INTERNET" L_INTERNET); STAT=$? ;;
-        2) RESULT=$(show_cat "2. BUREAUTIQUE" L_OFFICE); STAT=$? ;;
-        3) RESULT=$(show_cat "3. GRAPHISME" L_GRAPHISME); STAT=$? ;;
-        4) RESULT=$(show_cat "4. MULTIMÉDIA" L_MULTIMEDIA); STAT=$? ;;
-        5) RESULT=$(show_cat "5. DÉVELOPPEMENT" L_DEV); STAT=$? ;;
-        6) RESULT=$(show_cat "6. SYSTÈME" L_SYSTEME); STAT=$? ;;
+        1) RESULT=$(show_cat "1. INTERNET & CLOUD" L_INTERNET); STAT=$? ;;
+        2) RESULT=$(show_cat "2. BUREAUTIQUE & NOTES" L_OFFICE); STAT=$? ;;
+        3) RESULT=$(show_cat "3. GRAPHISME & DESIGN" L_GRAPHISME); STAT=$? ;;
+        4) RESULT=$(show_cat "4. MULTIMÉDIA & CRÉATION" L_MULTIMEDIA); STAT=$? ;;
+        5) RESULT=$(show_cat "5. DÉVELOPPEMENT & CODE" L_DEV); STAT=$? ;;
+        6) RESULT=$(show_cat "6. SYSTÈME & ADMIN" L_SYSTEME); STAT=$? ;;
         7) RESULT=$(show_cat "7. ÉDUCATION & JEUX" L_EDU_JEUX); STAT=$? ;;
     esac
 
@@ -183,7 +202,6 @@ while [ $STEP -le $TOTAL_STEPS ]; do
     fi
 done
 
-# --- RÉSUMÉ ET INSTALLATION ---
 ALL_FINAL_CHOICES="${CHOICES[*]}"
 
 if [[ -z "${ALL_FINAL_CHOICES// }" ]]; then
