@@ -46,6 +46,8 @@ chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
 ```
 
+## ✨ Apparence
+
 ![mega-blabla-installer](./mega-blabla-installer.jpg)
 
 ## ⚡ Pourquoi utiliser cet outil ?
