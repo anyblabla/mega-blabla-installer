@@ -7,8 +7,8 @@
 
 **L'outil de post-installation ultime pour les techniciens et utilisateurs Debian.** Développé par **Amaury (Blabla Linux)**, ce script automatise l'installation de plus de 90 logiciels sur Debian 11/12 (Stable) via une interface interactive.
 
-\> \[!IMPORTANT\]  
-\> **Note sur la version Beta** : Ce script est actuellement en phase **Beta (v0.1.0)**. Il est pleinement fonctionnel mais sujet à des évolutions majeures (structure du code, enrichissement du catalogue). Vos retours sont précieux pour l'améliorer !
+> [!IMPORTANT]  
+> **Note sur la version Beta** : Ce script est actuellement en phase **Beta (v0.1.0)**. Il est pleinement fonctionnel mais sujet à des évolutions majeures (structure du code, enrichissement du catalogue). Vos retours sont précieux pour l'améliorer !
 
 ## 👨‍💻 À propos de l'auteur
 
