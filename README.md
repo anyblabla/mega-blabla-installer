@@ -89,8 +89,8 @@ Le script repose sur **Whiptail** pour offrir une interface utilisateur TUI (*Te
 
 ## 🔗 Liens du projet
 
-* **Dépôt GitHub :** 👉 [https://github.com/anyblabla/mega-blabla-installer](https://www.google.com/search?q=https://github.com/anyblabla/mega-blabla-installer)
-* **Dépôt Gitea :** 👉 [https://gitea.blablalinux.be/blablalinux/mega-blabla-installer](https://www.google.com/search?q=https://gitea.blablalinux.be/blablalinux/mega-blabla-installer)
+* **Dépôt GitHub :** 👉 [https://github.com/anyblabla/mega-blabla-installer](https://github.com/anyblabla/mega-blabla-installer)
+* **Dépôt Gitea :** 👉 [https://gitea.blablalinux.be/blablalinux/mega-blabla-installer](https://gitea.blablalinux.be/blablalinux/mega-blabla-installer)
 
 ---
 
