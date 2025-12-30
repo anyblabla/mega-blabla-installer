@@ -46,6 +46,8 @@ chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
 ```
 
+![mega-blabla-installer](./mega-blabla-installer.jpg)
+
 ## ⚡ Pourquoi utiliser cet outil ?
 
 L'installation manuelle et individuelle de logiciels après une installation fraîche de Debian peut être chronophage. Le **Mega-Blabla-Installer** centralise les meilleures applications du monde libre dans une interface simplifiée et ergonomique.
@@ -87,3 +89,6 @@ Le script repose sur **Whiptail** pour offrir une interface utilisateur TUI (_Te
 Ce projet est distribué sous licence **GPLv3**. Vous êtes libre de l'utiliser, de le modifier et de le partager.
 
 _Fait avec passion par Amaury (BlablaLinux) pour la communauté Debian._
+
+[def]: mega-blabla-installer.jpg
+[def2]: /mega-blabla-installer/mega-blabla-installer.jpg
