@@ -5,10 +5,10 @@
 ![Version](https://img.shields.io/badge/Status-Beta-orange)
 ![GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
-**L'outil de post-installation ultime pour les techniciens et utilisateurs Debian.** Développé par **Amaury (Blabla Linux)**, ce script automatise l'installation de plus de 200 logiciels sur Debian 11/12 (Stable) via une interface interactive.
+**L'outil de post-installation ultime pour les techniciens et utilisateurs Debian.** Développé par **Amaury (Blabla Linux)**, ce script automatise l'installation de plus de 90 logiciels sur Debian 11/12 (Stable) via une interface interactive.
 
 > [!IMPORTANT]
-> **Note sur la version Beta** : Ce script est actuellement en phase **Beta**. Il est pleinement fonctionnel mais sujet à des évolutions majeures (structure du code, enrichissement du catalogue). Vos retours sont précieux pour l'améliorer !
+> **Note sur la version Beta** : Ce script est actuellement en phase **Beta (v0.1.0)**. Il est pleinement fonctionnel mais sujet à des évolutions majeures (structure du code, enrichissement du catalogue). Vos retours sont précieux pour l'améliorer !
 
 ---
 
@@ -65,15 +65,17 @@ Le script combine deux méthodes de distribution pour garantir stabilité et mod
 * **APT (Dépôts Debian)** : Privilégié pour les outils système, les utilitaires de base et les logiciels nécessitant une intégration profonde.
 * **Flatpak (Flathub)** : Utilisé pour les applications "utilisateur" afin de bénéficier des versions les plus récentes sans impacter la stabilité du cœur Debian.
 
-### 📂 Un catalogue organisé (+200 logiciels)
+### 📂 Un catalogue organisé (+90 logiciels)
 
-1. **Internet** : Navigateurs (Firefox, Brave, Edge), Messageries (Signal, Discord, Telegram).
-2. **Bureautique** : Suites Office (LibreOffice, OnlyOffice), éditeurs PDF, Obsidian.
-3. **Graphisme** : GIMP, Inkscape, Blender, FreeCAD.
-4. **Multimédia** : VLC, MPV, Kdenlive, Audacity.
-5. **Développement** : VS Code, Vim, Docker, Android Studio.
-6. **Système** : Btop, Stacer, GParted, Virt-Manager.
-7. **Éducation & Jeux** : GCompris, Scratch, Steam, Lutris.
+Le catalogue est structuré en **7 catégories thématiques** pour une sélection sur mesure :
+
+1. **Internet & Cloud** : Navigateurs (Firefox, Brave, Edge), Messageries (Signal, Discord, Telegram), Cloud (Nextcloud, Dropbox).
+2. **Bureautique & Notes** : Suites Office (LibreOffice, OnlyOffice), éditeurs PDF, Obsidian, Joplin.
+3. **Graphisme & Design** : GIMP, Inkscape, Blender, FreeCAD, Darktable.
+4. **Multimédia & Création** : VLC, MPV, Kdenlive, Audacity, OBS Studio.
+5. **Développement & Code** : VS Code, Vim, Docker, Android Studio, NodeJS.
+6. **Système & Admin** : Btop, Stacer, GParted, Virt-Manager, Timeshift, Nmap.
+7. **Éducation & Jeux** : GCompris, Scratch, Steam, Lutris, RetroArch.
 
 ---
 
@@ -83,7 +85,7 @@ Le script repose sur **Whiptail** pour offrir une interface utilisateur TUI (*Te
 
 * **Navigation non-linéaire** : Revenez en arrière pour modifier vos choix avant l'installation.
 * **Auto-configuration** : Vérification de `flatpak`, activation de `flathub` et mise à jour APT automatiques.
-* **Respect du système** : Aucune modification n'est effectuée sans votre validation finale.
+* **Respect du système** : Aucune modification n'est effectuée sans votre validation finale dans le menu de résumé.
 
 ---
 
