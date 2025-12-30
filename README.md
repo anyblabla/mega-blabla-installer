@@ -1,5 +1,10 @@
 # 📦 Mega-Blabla-Installer
 
+![Debian](https://img.shields.io/badge/OS-Debian-A81D33?logo=debian&logoColor=white)
+![Bash](https://img.shields.io/badge/Shell-Bash-4EAA25?logo=gnubash&logoColor=white)
+![Version](https://img.shields.io/badge/Status-Beta-orange)
+![GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+
 **L'outil de post-installation ultime pour les techniciens et utilisateurs Debian.** Développé par **Amaury (Blabla Linux)**, ce script automatise l'installation de plus de 200 logiciels sur Debian 11/12 (Stable) via une interface interactive.
 
 > [!IMPORTANT]
@@ -19,14 +24,30 @@ Administrateur système spécialisé dans le reconditionnement matériel sous Li
 
 Pour garantir une stabilité parfaite de l'interface graphique (**Whiptail**) et une prise en charge totale de votre clavier (touches fléchées et espace), le script doit être téléchargé et exécuté localement :
 
+### Option 1 : Via GitHub (Recommandé)
+
 ```bash
-# 1. Télécharger le script depuis le Gitea Blabla Linux
+# 1. Télécharger le script
+wget https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh
+
+# 2. Rendre le fichier exécutable
+chmod +x mega-blabla-installer.sh
+
+# 3. Lancer l'installateur
+sudo ./mega-blabla-installer.sh
+
+```
+
+### Option 2 : Via Gitea (Blabla Linux)
+
+```bash
+# 1. Télécharger le script
 wget https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh
 
 # 2. Rendre le fichier exécutable
 chmod +x mega-blabla-installer.sh
 
-# 3. Lancer l'installateur avec les droits administrateur (sudo)
+# 3. Lancer l'installateur
 sudo ./mega-blabla-installer.sh
 
 ```
@@ -46,15 +67,13 @@ Le script combine deux méthodes de distribution pour garantir stabilité et mod
 
 ### 📂 Un catalogue organisé (+200 logiciels)
 
-Le catalogue est structuré en **7 catégories thématiques** pour une sélection sur mesure :
-
-1. **Internet** : Navigateurs (Firefox, Brave, Edge), Messageries (Signal, Discord, Telegram), Clients Torrent.
-2. **Bureautique** : Suites Office (LibreOffice, OnlyOffice), éditeurs PDF, outils de prise de notes (Obsidian, Joplin).
-3. **Graphisme** : Retouche photo (GIMP), dessin vectoriel (Inkscape), modélisation 3D (Blender, FreeCAD).
-4. **Multimédia** : Lecteurs universels (VLC, MPV), montage vidéo (Kdenlive, Shotcut), stations audio (Audacity, Mixxx).
-5. **Développement** : Éditeurs de code (VS Code, Vim), conteneurs (Docker), environnements (Android Studio, Python).
-6. **Système** : Monitoring (Btop, Stacer), utilitaires disques (GParted), virtualisation (Virt-Manager).
-7. **Éducation & Jeux** : Logiciels pédagogiques (GCompris, Scratch), plateformes de jeux (Steam, Lutris, RetroArch).
+1. **Internet** : Navigateurs (Firefox, Brave, Edge), Messageries (Signal, Discord, Telegram).
+2. **Bureautique** : Suites Office (LibreOffice, OnlyOffice), éditeurs PDF, Obsidian.
+3. **Graphisme** : GIMP, Inkscape, Blender, FreeCAD.
+4. **Multimédia** : VLC, MPV, Kdenlive, Audacity.
+5. **Développement** : VS Code, Vim, Docker, Android Studio.
+6. **Système** : Btop, Stacer, GParted, Virt-Manager.
+7. **Éducation & Jeux** : GCompris, Scratch, Steam, Lutris.
 
 ---
 
@@ -62,16 +81,21 @@ Le catalogue est structuré en **7 catégories thématiques** pour une sélectio
 
 Le script repose sur **Whiptail** pour offrir une interface utilisateur TUI (*Text User Interface*) robuste :
 
-* **Navigation non-linéaire** : Un système de gestion d'étapes permet de revenir en arrière pour modifier vos choix avant de lancer le processus d'installation.
-* **Auto-configuration** : Le script vérifie l'état de `flatpak`, active le dépôt `flathub` si nécessaire et met à jour les sources APT avant de commencer.
-* **Respect du système** : Aucune modification n'est effectuée sans votre validation finale dans le menu de résumé.
+* **Navigation non-linéaire** : Revenez en arrière pour modifier vos choix avant l'installation.
+* **Auto-configuration** : Vérification de `flatpak`, activation de `flathub` et mise à jour APT automatiques.
+* **Respect du système** : Aucune modification n'est effectuée sans votre validation finale.
+
+---
+
+## 🔗 Liens du projet
+
+* **Dépôt GitHub :** 👉 [https://github.com/anyblabla/mega-blabla-installer](https://www.google.com/search?q=https://github.com/anyblabla/mega-blabla-installer)
+* **Dépôt Gitea :** 👉 [https://gitea.blablalinux.be/blablalinux/mega-blabla-installer](https://www.google.com/search?q=https://gitea.blablalinux.be/blablalinux/mega-blabla-installer)
 
 ---
 
 ## 📄 Licence
 
-Ce projet est distribué sous licence **GPLv3**. Vous êtes libre de l'utiliser, de le modifier et de le partager, à condition que vos modifications restent également sous licence GPLv3.
-
----
+Ce projet est distribué sous licence **GPLv3**. Vous êtes libre de l'utiliser, de le modifier et de le partager.
 
 *Fait avec passion par Amaury (BlablaLinux) pour la communauté Debian.*
