@@ -1,15 +1,14 @@
 #!/bin/bash
 
 # ==============================================================================
-# Script    : Mega-Installer BlablaLinux (200+ Logiciels)
-# Version   : 0.1.0-BETA
-# Mode      : Exécution Locale
+# Script    : Mega-Installer BlablaLinux (FULL 130+ Logiciels)
+# Version   : 0.1.7-BETA
+# Mode      : Style Debian & Correction Rendu (FIX COMPLET + VISIBILITÉ UPDATE)
 # Auteur    : Amaury aka BlablaLinux (https://link.blablalinux.be)
 # Expertise : Debian, Ubuntu, Linux Mint, Proxmox
-# Licence   : GPLv3
 # ==============================================================================
 
-VERSION="0.1.0-BETA"
+VERSION="0.1.7-BETA"
 
 # --- A Classer ---
 
@@ -25,28 +24,43 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-clear
-echo "===================================================="
-echo "    PRÉPARATION DU SYSTÈME - BLABLA LINUX          "
-echo "    Version : $VERSION                             "
-echo "===================================================="
-echo "🚀 Mise à jour et installation des outils (Debian)..."
-apt update && apt install -y whiptail flatpak tput wget curl > /dev/null 2>&1
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+# --- CONFIGURATION DES DIMENSIONS ---
+calc_dims() {
+    TERM_WIDTH=$(tput cols)
+    TERM_HEIGHT=$(tput lines)
+    WT_WIDTH=80
+    [ $TERM_WIDTH -lt 80 ] && WT_WIDTH=$((TERM_WIDTH - 2))
+    WT_HEIGHT=$(( TERM_HEIGHT * 85 / 100 ))
+    [ $WT_HEIGHT -lt 22 ] && WT_HEIGHT=22
+    WT_LIST_HEIGHT=$(( WT_HEIGHT - 8 ))
+}
 
-install_pkg() {
-    local id=$1
-    local method=$2
-    local pkg=$3
-    echo -e "\e[32m📦 Installation de $id ($method)...\e[0m"
+# --- FONCTIONS DE DÉTECTION ET GESTION ---
+check_installed() {
+    local method=$1; local pkg=$2; local id=$3
     if [ "$method" == "apt" ]; then
-        apt install -y $pkg
+        local first_pkg=$(echo $pkg | awk '{print $1}')
+        if dpkg-query -W -f='${Status}' "$first_pkg" 2>/dev/null | grep -q "ok installed"; then return 0; fi
+        if command -v "$first_pkg" >/dev/null 2>&1; then return 0; fi
+        if [[ "$id" == "LO_APT" ]] && command -v libreoffice >/dev/null 2>&1; then return 0; fi
     else
-        flatpak install flathub -y --noninteractive $pkg
+        if flatpak info "$pkg" > /dev/null 2>&1; then return 0; fi
+    fi
+    return 1
+}
+
+manage_pkg() {
+    local id=$1; local method=$2; local pkg=$3
+    if [ "$ACTION" == "INSTALL" ]; then
+        echo -e "\e[32m📦 Installation de $id ($method)...\e[0m"
+        [ "$method" == "apt" ] && apt install -y $pkg || flatpak install flathub -y --noninteractive $pkg
+    else
+        echo -e "\e[31m🗑️ Désinstallation de $id ($method)...\e[0m"
+        [ "$method" == "apt" ] && apt purge -y $pkg || flatpak uninstall -y $pkg
     fi
 }
 
-# --- LISTE MASSIVE (EXTRAITS POUR ATTEINDRE 200+) ---
+# --- LISTES DES LOGICIELS COMPLETES (130+ Logiciels) ---
 
 L_INTERNET=(
     "FF_APT" "Firefox ESR (APT)" OFF "apt" "firefox-esr" "FF_FP" "Firefox (Flatpak)" OFF "flatpak" "org.mozilla.firefox"
@@ -90,7 +104,7 @@ L_GRAPHISME=(
     "MYP_APT" "MyPaint" OFF "apt" "mypaint" "SWE_FP" "SweetHome3D" OFF "flatpak" "com.sweethome3d.Sweethome3d"
     "COL_APT" "Gpick (Colors)" OFF "apt" "gpick" "FONT_APT" "Font-manager" OFF "apt" "font-manager"
     "SHOT_APT" "Shotwell" OFF "apt" "shotwell" "FLAM_APT" "Flameshot" OFF "apt" "flameshot"
-    "NOM_FP" "Nomacs" OFF "flatpak" "org.nomacs.ImageLounge" "VEO_FP" "VEO Video" OFF "flatpak" "io.github.veo"
+    "NOM_FP" "Nomacs" OFF "flatpak" "org.nomacs.ImageLounge"
 )
 
 L_MULTIMEDIA=(
@@ -135,7 +149,7 @@ L_SYSTEME=(
     "CLAM_APT" "ClamAV" OFF "apt" "clamav clamtk" "IPSC_APT" "Ipcalc" OFF "apt" "ipcalc"
     "NMAP_APT" "Nmap" OFF "apt" "nmap" "WIRES_APT" "Wireshark" OFF "apt" "wireshark"
     "TMUX_APT" "Tmux" OFF "apt" "tmux" "MC_APT" "Midnight Commander" OFF "apt" "mc"
-    "PROX_TOOL" "Proxmox Post-Install" OFF "apt" "pve-manager" "BTR_APT" "Btrfs-progs" OFF "apt" "btrfs-progs"
+    "PROX_TOOL" "Proxmox Tool" OFF "apt" "pve-manager" "BTR_APT" "Btrfs-progs" OFF "apt" "btrfs-progs"
 )
 
 L_EDU_JEUX=(
@@ -150,35 +164,43 @@ L_EDU_JEUX=(
     "GANA_APT" "GanttProject" OFF "apt" "ganttproject" "LOG_FP" "Logisim-evolution" OFF "flatpak" "com.github.reds.LogisimEvolution"
 )
 
-# --- LOGIQUE DE NAVIGATION ---
+# --- NAVIGATION ---
 declare -A CHOICES
 STEP=1
 TOTAL_STEPS=7
 
 show_cat() {
-    local title=$1
-    local -n list=$2
-    local current="${CHOICES[$STEP]}"
-    local args=()
-
-    local WT_HEIGHT=$(tput lines); [ $WT_HEIGHT -lt 24 ] && WT_HEIGHT=24
-    local WT_WIDTH=$(tput cols); [ $WT_WIDTH -lt 120 ] && WT_WIDTH=120
-
+    local title=$1; local -n list=$2; local current="${CHOICES[$STEP]}"; local args=()
+    calc_dims
+    
     for ((i=0; i<${#list[@]}; i+=5)); do
-        local id="${list[i]}"
-        local state="OFF"
+        local id="${list[i]}"; local display="${list[i+1]}"; local method="${list[i+3]}"; local pkg="${list[i+4]}"; local state="OFF"
+        if check_installed "$method" "$pkg" "$id"; then display="$display [INSTALLÉ]"; fi
         [[ "$current" == *"$id"* ]] && state="ON"
-        args+=("$id" "${list[i+1]}" "$state")
+        args+=("$id" "$display" "$state")
     done
 
     whiptail --title "$title ($STEP/$TOTAL_STEPS)" \
-             --backtitle "Mega-Installer par Amaury (Blabla Linux) - Version $VERSION - Expertise Debian" \
-             --ok-button "Suivant" \
-             --cancel-button "Précédent" \
-             --checklist "Espace pour cocher/décocher, Entrée pour Suivant, Echap pour Quitter" \
-             $((WT_HEIGHT - 6)) $((WT_WIDTH - 10)) 14 \
-             "${args[@]}" 3>&1 1>&2 2>&3
+             --backtitle "Mega-Installer Blabla Linux v$VERSION - Expert : Amaury Libert" \
+             --ok-button "Suivant" --cancel-button "Précédent" --checklist \
+             "Espace pour cocher, Entrée pour valider." \
+             $WT_HEIGHT $WT_WIDTH $WT_LIST_HEIGHT "${args[@]}" 3>&1 1>&2 2>&3
 }
+
+# --- MAIN ---
+# 1. On affiche d'abord le rafraîchissement des dépôts SANS masquer le retour
+clear
+echo -e "\e[34m🚀 Mise à jour système (Rafraîchissement des dépôts)...\e[0m"
+apt update 
+
+# 2. On passe ensuite aux menus
+calc_dims
+ACTION=$(whiptail --title "Mega-Installer BlablaLinux" \
+    --backtitle "Expertise Debian - Amaury Libert (Blabla Linux)" \
+    --menu "Mise à jour terminée. Que souhaitez-vous faire ?" 15 $WT_WIDTH 2 \
+    "INSTALL" "Installer des logiciels (Sélection manuelle)" \
+    "REMOVE" "Désinstaller des logiciels (Nettoyage)" 3>&1 1>&2 2>&3)
+[ $? -ne 0 ] && exit_script
 
 while [ $STEP -le $TOTAL_STEPS ]; do
     case $STEP in
@@ -190,44 +212,27 @@ while [ $STEP -le $TOTAL_STEPS ]; do
         6) RESULT=$(show_cat "6. SYSTÈME & ADMIN" L_SYSTEME); STAT=$? ;;
         7) RESULT=$(show_cat "7. ÉDUCATION & JEUX" L_EDU_JEUX); STAT=$? ;;
     esac
-
-    if [ $STAT -eq 0 ]; then
-        CHOICES[$STEP]="$RESULT"
-        ((STEP++))
-    elif [ $STAT -eq 1 ]; then
-        ((STEP--))
-        [ $STEP -lt 1 ] && exit_script
-    else
-        exit_script
-    fi
+    if [ $STAT -eq 0 ]; then CHOICES[$STEP]="$RESULT"; ((STEP++))
+    elif [ $STAT -eq 1 ]; then ((STEP--)); [ $STEP -lt 1 ] && exit_script
+    else exit_script; fi
 done
 
 ALL_FINAL_CHOICES="${CHOICES[*]}"
+if [[ -z "${ALL_FINAL_CHOICES// }" ]]; then exit 0; fi
 
-if [[ -z "${ALL_FINAL_CHOICES// }" ]]; then
-    whiptail --msgbox "Aucun logiciel sélectionné. Fin du script." 10 50
-    exit 0
-fi
-
-whiptail --yesno "Lancer l'installation sur votre système Debian ?" 10 50 || exit_script
+whiptail --yesno "Confirmer l'opération ?" 10 60 || exit_script
 
 clear
-echo "===================================================="
-echo "    INSTALLATION EN COURS - BLABLA LINUX           "
-echo "    Script Version : $VERSION                      "
-echo "===================================================="
-
+echo "🛠️  Exécution : $ACTION..."
 for c in $ALL_FINAL_CHOICES; do
     c=$(echo $c | sed 's/"//g')
     for l in L_INTERNET L_OFFICE L_GRAPHISME L_MULTIMEDIA L_DEV L_SYSTEME L_EDU_JEUX; do
         declare -n current_list=$l
         for ((i=0; i<${#current_list[@]}; i+=5)); do
-            if [ "$c" == "${current_list[i]}" ]; then
-                install_pkg "${current_list[i]}" "${current_list[i+3]}" "${current_list[i+4]}"
-            fi
+            if [ "$c" == "${current_list[i]}" ]; then manage_pkg "${current_list[i]}" "${current_list[i+3]}" "${current_list[i+4]}"; fi
         done
     done
 done
 
-apt autoremove -y > /dev/null 2>&1
-whiptail --title "Succès" --msgbox "Installation terminée ! Merci d'avoir utilisé les outils Blabla Linux (v$VERSION)." 10 60
+[ "$ACTION" == "REMOVE" ] && apt autoremove -y > /dev/null 2>&1
+whiptail --title "Succès" --msgbox "Terminé ! (v$VERSION)" 10 60

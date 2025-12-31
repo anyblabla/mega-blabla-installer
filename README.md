@@ -1,14 +1,15 @@
 ## 📦 Mega-Blabla-Installer
 
-![Debian](https://img.shields.io/badge/OS-Debian-A81D33?logo=debian&logoColor=white)  
-![Bash](https://img.shields.io/badge/Shell-Bash-4EAA25?logo=gnubash&logoColor=white)  
-![Version](https://img.shields.io/badge/Status-Beta-orange)  
+![Debian](https://img.shields.io/badge/OS-Debian-A81D33?logo=debian&logoColor=white)
+![Bash](https://img.shields.io/badge/Shell-Bash-4EAA25?logo=gnubash&logoColor=white)
+![Version](https://img.shields.io/badge/Status-Beta-orange)
 ![GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
-**L'outil de post-installation ultime pour les techniciens et utilisateurs Debian.** Développé par **Amaury (Blabla Linux)**, ce script automatise l'installation de plus de 90 logiciels sur Debian 11/12 (Stable) via une interface interactive.
+**L'outil de post-installation ultime pour les techniciens et utilisateurs Debian.** Développé par **Amaury (Blabla Linux)**, ce script automatise l'installation de plus de **130 logiciels** sur Debian 11/12 (Stable) via une interface interactive.
 
 > [!IMPORTANT]
-> **Note sur la version Beta** : Ce script est actuellement en phase **Beta (v0.1.0)**. Il est pleinement fonctionnel mais sujet à des évolutions majeures (structure du code, enrichissement du catalogue). Vos retours sont précieux pour l'améliorer !
+> **Note sur la version Beta (v0.1.7)** : Ce script est actuellement en phase **Beta**. Il est pleinement fonctionnel mais sujet à des évolutions majeures (structure du code, enrichissement du catalogue). Vos retours sont précieux pour l'améliorer !
+> **Nouveauté :** Le catalogue passe de 90 à plus de **130 logiciels** et intègre un **mode désinstallation**.
 
 > [!WARNING]
 > **Projet Passion** : Ce script est développé sur mon temps libre par pur plaisir de partage. Je ne suis tenu à aucun engagement ni calendrier précis concernant la sortie des nouvelles releases ou des futures fonctionnalités.
@@ -57,38 +58,33 @@ sudo ./mega-blabla-installer.sh
 
 L'installation manuelle et individuelle de logiciels après une installation fraîche de Debian peut être chronophage. Le **Mega-Blabla-Installer** centralise les meilleures applications du monde libre dans une interface simplifiée et ergonomique.
 
-### 🛠️ Une gestion hybride intelligente
+### 🛠️ Une gestion hybride et bidirectionnelle
 
 Le script combine deux méthodes de distribution pour garantir stabilité et modernité :
 
 * **APT (Dépôts Debian)** : Privilégié pour les outils système, les utilitaires de base et les logiciels nécessitant une intégration profonde.
-* **Flatpak (Flathub)** : Utilisé pour les applications "utilisateur" afin de bénéficier des versions les plus récentes sans impacter la stabilité du cœur Debian.
+* **Flatpak (Flathub)** : Utilisé pour les applications "utilisateur" afin de bénéficier des versions les plus récentes.
+* **Mode Désinstallation** : Nouveau dans la v0.1.7, il permet de nettoyer le système en supprimant proprement les logiciels sélectionnés.
 
-### 📂 Un catalogue organisé (+90 logiciels)
+### 📂 Un catalogue organisé (130+ logiciels)
 
 Le catalogue est structuré en **7 catégories thématiques** pour une sélection sur mesure :
 
-1. **Internet & Cloud** : Navigateurs (Firefox, Brave, Edge), Messageries (Signal, Discord, Telegram), Cloud (Nextcloud, Dropbox).
-2. **Bureautique & Notes** : Suites Office (LibreOffice, OnlyOffice), éditeurs PDF, Obsidian, Joplin.
-3. **Graphisme & Design** : GIMP, Inkscape, Blender, FreeCAD, Darktable.
-4. **Multimédia & Création** : VLC, MPV, Kdenlive, Audacity, OBS Studio.
-5. **Développement & Code** : VS Code, Vim, Docker, Android Studio, NodeJS.
-6. **Système & Admin** : Btop, Stacer, GParted, Virt-Manager, Timeshift, Nmap.
-7. **Éducation & Jeux** : GCompris, Scratch, Steam, Lutris, RetroArch.
+1. **Internet & Cloud** : Navigateurs (Firefox ESR/Flatpak, Brave, Chromium, Edge, Opera, Vivaldi, Tor), Messageries (Signal, Telegram, Discord, WebCord, Element, Slack), Cloud (Nextcloud, Dropbox).
+2. **Bureautique & Notes** : Suites Office (LibreOffice APT/Flatpak, OnlyOffice, WPS), Notes (Obsidian, Joplin, Gnote, Zim), PDF (Evince, Master PDF Editor), Calibre, Zotero.
+3. **Graphisme & Design** : GIMP, Inkscape, Krita, Blender, Draw.io, Darktable, RawTherapee, FreeCAD, LibreCAD, SweetHome3D, Flameshot.
+4. **Multimédia & Création** : Lecteurs (VLC, MPV, Kodi, Elisa), Montage (Kdenlive, Handbrake, Shotcut, Pitivi), Audio (Audacity, Spotify, Strawberry, Ardour, MuseScore).
+5. **Développement & Code** : VS Code, Vim, Git, Python 3, Geany, Docker, Android Studio, DBeaver, Arduino IDE, PyCharm, NodeJS, Postman.
+6. **Système & Admin** : Monitoring (Btop, Htop, Neofetch), Maintenance (Stacer, BleachBit, Timeshift, GParted), Virtualisation (Virt-Manager), Sécurité (Rkhunter, ClamAV, Nmap, Wireshark), Proxmox Tools.
+7. **Éducation & Jeux** : GCompris, Stellarium, Scratch, Steam, Lutris, Minecraft (Prism), SuperTuxKart, RetroArch, 0 A.D., Logisim-evolution.
 
 ## ⚙️ Fonctionnement technique
 
 Le script repose sur **Whiptail** pour offrir une interface utilisateur TUI (*Text User Interface*) robuste :
 
-* **Navigation non-linéaire** : Revenez en arrière pour modifier vos choix avant l'installation.
-* **Auto-configuration** : Vérification de `flatpak`, activation de `flathub` et mise à jour APT automatiques.
+* **Navigation non-linéaire** : Revenez en arrière pour modifier vos choix avant l'opération finale.
+* **Visibilité Système** : La mise à jour `apt update` est affichée en direct au lancement pour un meilleur suivi technique.
 * **Respect du système** : Aucune modification n'est effectuée sans votre validation finale dans le menu de résumé.
-
-## 🗺️ Roadmap & Évolutions
-
-Le projet évolue selon mes disponibilités et vos retours.
-
-👉 **Consultez la [Roadmap complète ici](./ROADMAP.md)** pour voir les fonctionnalités à venir (Mode désinstallation, nouveaux logiciels, etc.).
 
 ## 🔗 Liens du projet
 
