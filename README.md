@@ -1,9 +1,10 @@
 ## 📦 Mega-Blabla-Installer
 
-![Debian](https://img.shields.io/badge/OS-Debian-A81D33?logo=debian&logoColor=white)
-![Bash](https://img.shields.io/badge/Shell-Bash-4EAA25?logo=gnubash&logoColor=white)
-![Version](https://img.shields.io/badge/Status-Beta-orange)
-![GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+[**Français**](#français) | [**English**](#english)
+
+---
+
+<h2 id="français">🇫🇷 Français</h2>
 
 **L'outil de post-installation ultime pour les techniciens et utilisateurs Debian.** Développé par **Amaury (Blabla Linux)**, ce script automatise l'installation de plus de **130 logiciels** sur Debian 11/12 (Stable) via une interface interactive.
 
@@ -27,72 +28,95 @@ Pour garantir une stabilité parfaite de l'interface graphique (**Whiptail**) et
 ### Option 1 : Via GitHub (Recommandé)
 
 ```plaintext
-# 1. Télécharger le script
 wget https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh
-
-# 2. Rendre le fichier exécutable
 chmod +x mega-blabla-installer.sh
-
-# 3. Lancer l'installateur
 sudo ./mega-blabla-installer.sh
 ```
 
 ### Option 2 : Via Gitea (Blabla Linux)
 
 ```plaintext
-# 1. Télécharger le script
 wget https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh
-
-# 2. Rendre le fichier exécutable
 chmod +x mega-blabla-installer.sh
-
-# 3. Lancer l'installateur
 sudo ./mega-blabla-installer.sh
 ```
 
-## ✨ Visuel
+---
 
-![mega-blabla-installer](./mega-blabla-installer.jpg)
+<h2 id="english">🇺🇸 English</h2>
 
-## ⚡ Pourquoi utiliser cet outil ?
+**The ultimate post-installation tool for Debian technicians and users.** Developed by **Amaury (Blabla Linux)**, this script automates the installation of over **130 software packages** on Debian 11/12 (Stable) through an interactive interface.
 
-L'installation manuelle et individuelle de logiciels après une installation fraîche de Debian peut être chronophage. Le **Mega-Blabla-Installer** centralise les meilleures applications du monde libre dans une interface simplifiée et ergonomique.
+> [!IMPORTANT]
+> **Beta Version Note (v0.1.7)**: This script is currently in **Beta**. It is fully functional but subject to major updates (code structure, catalog expansion). Your feedback is valuable for improvement!
+> **New:** The catalog has grown from 90 to over **130 programs** and includes an **uninstallation mode**.
 
-### 🛠️ Une gestion hybride et bidirectionnelle
+> [!WARNING]
+> **Passion Project**: This script is developed during my free time for the pure pleasure of sharing. I am not bound by any specific commitment or schedule regarding new releases or future features.
 
-Le script combine deux méthodes de distribution pour garantir stabilité et modernité :
+## 👨‍💻 About the Author
 
-* **APT (Dépôts Debian)** : Privilégié pour les outils système, les utilitaires de base et les logiciels nécessitant une intégration profonde.
-* **Flatpak (Flathub)** : Utilisé pour les applications "utilisateur" afin de bénéficier des versions les plus récentes.
-* **Mode Désinstallation** : Nouveau dans la v0.1.7, il permet de nettoyer le système en supprimant proprement les logiciels sélectionnés.
+System administrator specialized in hardware refurbishing under Linux, I advocate for sustainable and free computing. This script is the result of my field expertise to facilitate the deployment of high-performance, ready-to-use workstations.
 
-### 📂 Un catalogue organisé (130+ logiciels)
+👉 **One link:** [link.blablalinux.be](https://link.blablalinux.be)
 
-Le catalogue est structuré en **7 catégories thématiques** pour une sélection sur mesure :
+## 🚀 Installation and Launch
 
-1. **Internet & Cloud** : Navigateurs (Firefox ESR/Flatpak, Brave, Chromium, Edge, Opera, Vivaldi, Tor), Messageries (Signal, Telegram, Discord, WebCord, Element, Slack), Cloud (Nextcloud, Dropbox).
-2. **Bureautique & Notes** : Suites Office (LibreOffice APT/Flatpak, OnlyOffice, WPS), Notes (Obsidian, Joplin, Gnote, Zim), PDF (Evince, Master PDF Editor), Calibre, Zotero.
-3. **Graphisme & Design** : GIMP, Inkscape, Krita, Blender, Draw.io, Darktable, RawTherapee, FreeCAD, LibreCAD, SweetHome3D, Flameshot.
-4. **Multimédia & Création** : Lecteurs (VLC, MPV, Kodi, Elisa), Montage (Kdenlive, Handbrake, Shotcut, Pitivi), Audio (Audacity, Spotify, Strawberry, Ardour, MuseScore).
-5. **Développement & Code** : VS Code, Vim, Git, Python 3, Geany, Docker, Android Studio, DBeaver, Arduino IDE, PyCharm, NodeJS, Postman.
-6. **Système & Admin** : Monitoring (Btop, Htop, Neofetch), Maintenance (Stacer, BleachBit, Timeshift, GParted), Virtualisation (Virt-Manager), Sécurité (Rkhunter, ClamAV, Nmap, Wireshark), Proxmox Tools.
-7. **Éducation & Jeux** : GCompris, Stellarium, Scratch, Steam, Lutris, Minecraft (Prism), SuperTuxKart, RetroArch, 0 A.D., Logisim-evolution.
+To ensure perfect stability of the graphical interface (**Whiptail**) and full support for your keyboard (arrow keys and spacebar), the script must be downloaded and run locally:
 
-## ⚙️ Fonctionnement technique
+### Option 1: Via GitHub (Recommended)
 
-Le script repose sur **Whiptail** pour offrir une interface utilisateur TUI (*Text User Interface*) robuste :
+```plaintext
+wget https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh
+chmod +x mega-blabla-installer.sh
+sudo ./mega-blabla-installer.sh
+```
 
-* **Navigation non-linéaire** : Revenez en arrière pour modifier vos choix avant l'opération finale.
-* **Visibilité Système** : La mise à jour `apt update` est affichée en direct au lancement pour un meilleur suivi technique.
-* **Respect du système** : Aucune modification n'est effectuée sans votre validation finale dans le menu de résumé.
+### Option 2: Via Gitea (Blabla Linux)
 
-## 🔗 Liens du projet
+```plaintext
+wget https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh
+chmod +x mega-blabla-installer.sh
+sudo ./mega-blabla-installer.sh
+```
 
-* **Dépôt GitHub :** 👉 [https://github.com/anyblabla/mega-blabla-installer](https://github.com/anyblabla/mega-blabla-installer)
-* **Dépôt Gitea :** 👉 [https://gitea.blablalinux.be/blablalinux/mega-blabla-installer](https://gitea.blablalinux.be/blablalinux/mega-blabla-installer)
+---
 
-## 📄 Licence
+## ✨ Visuel / Visual
 
-Ce projet est distribué sous licence **GPLv3**. Vous êtes libre de l'utiliser, de le modifier et de le partager.
+## ⚡ Pourquoi utiliser cet outil ? / Why use this tool?
 
-*Fait avec passion par Amaury (BlablaLinux) pour la communauté Debian.*
+**FR:** L'installation manuelle et individuelle de logiciels après une installation fraîche de Debian peut être chronophage. Le **Mega-Blabla-Installer** centralise les meilleures applications du monde libre dans une interface simplifiée et ergonomique.
+
+**EN:** Manually installing software one by one after a fresh Debian install can be time-consuming. **Mega-Blabla-Installer** centralizes the best free software applications in a simplified and ergonomic interface.
+
+### 🛠️ Une gestion hybride et bidirectionnelle / Hybrid and bidirectional management
+
+* **APT (Dépôts Debian)** : Privilégié pour les outils système / Preferred for system tools.
+* **Flatpak (Flathub)** : Utilisé pour les applications "utilisateur" récentes / Used for recent "user" applications.
+* **Mode Désinstallation / Uninstallation Mode** : Permet de nettoyer le système proprement / Allows for a clean system cleanup.
+
+### 📂 Un catalogue organisé (130+ logiciels) / Organized catalog (130+ software)
+
+1. **Internet & Cloud** : Firefox ESR/Flatpak, Brave, Chromium, Edge, Opera, Vivaldi, Tor, Signal, Telegram, Discord, WebCord, Element, Slack, Nextcloud, Dropbox.
+2. **Bureautique & Notes / Office & Notes** : LibreOffice APT/Flatpak, OnlyOffice, WPS, Obsidian, Joplin, Gnote, Zim, Evince, Master PDF Editor, Calibre, Zotero.
+3. **Graphisme & Design / Graphics & Design** : GIMP, Inkscape, Krita, Blender, Draw.io, Darktable, RawTherapee, FreeCAD, LibreCAD, SweetHome3D, Flameshot.
+4. **Multimédia & Création / Multimedia & Creation** : VLC, MPV, Kodi, Elisa, Kdenlive, Handbrake, Shotcut, Pitivi, Audacity, Spotify, Strawberry, Ardour, MuseScore.
+5. **Développement & Code / Development & Code** : VS Code, Vim, Git, Python 3, Geany, Docker, Android Studio, DBeaver, Arduino IDE, PyCharm, NodeJS, Postman.
+6. **Système & Admin / System & Admin** : Monitoring (Btop, Htop, Neofetch), Maintenance (Stacer, BleachBit, Timeshift, GParted), Virtualisation (Virt-Manager), Sécurité (Rkhunter, ClamAV, Nmap, Wireshark), Proxmox Tools.
+7. **Éducation & Jeux / Education & Games** : GCompris, Stellarium, Scratch, Steam, Lutris, Minecraft (Prism), SuperTuxKart, RetroArch, 0 A.D., Logisim-evolution.
+
+## ⚙️ Fonctionnement technique / Technical Operation
+
+* **Navigation non-linéaire / Non-linear navigation** : Revenez en arrière pour modifier vos choix / Go back to modify your choices.
+* **Visibilité Système / System Visibility** : Mise à jour `apt update` affichée en direct / Live `apt update` display.
+* **Respect du système / System respect** : Validation finale requise / Final validation required.
+
+## 🔗 Liens du projet / Project Links
+
+* **GitHub :** [https://github.com/anyblabla/mega-blabla-installer](https://github.com/anyblabla/mega-blabla-installer)
+* **Gitea :** [https://gitea.blablalinux.be/blablalinux/mega-blabla-installer](https://gitea.blablalinux.be/blablalinux/mega-blabla-installer)
+
+## 📄 Licence / License
+
+**GPLv3** - *Fait avec passion par Amaury (BlablaLinux) pour la communauté Debian / Made with passion by Amaury (BlablaLinux) for the Debian community.*
