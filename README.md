@@ -5,6 +5,16 @@
 ![Version](https://img.shields.io/badge/Status-Beta--0.1.7-orange)  
 ![GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
+<details>
+  <summary>📸 Cliquez ici pour voir les captures d'écran / Click here to see screenshots</summary>
+
+  ### Menu Principal / Main Menu
+  ![mega-blabla-installer](./assets/mega-blabla-installer.jpg)
+
+  ### Mode installation / installation Mode
+  ![mega-blabla-installer-02](./assets/mega-blabla-installer-02.jpg)
+  </details>
+
 [**Français**](#french) | [**English**](#english)
 
 ---
@@ -32,7 +42,6 @@ Pour garantir une stabilité parfaite de l'interface graphique (**Whiptail**) et
 wget [https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh](https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh)
 chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
-
 ```
 
 ### Option 2 : Via Gitea (Blabla Linux)
@@ -41,7 +50,6 @@ sudo ./mega-blabla-installer.sh
 wget [https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh](https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh)
 chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
-
 ```
 
 ---
@@ -73,7 +81,6 @@ To ensure perfect stability of the graphical interface (**Whiptail**) and full s
 wget [https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh](https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh)
 chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
-
 ```
 
 ### Option 2: Via Gitea (Blabla Linux)
@@ -82,7 +89,6 @@ sudo ./mega-blabla-installer.sh
 wget [https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh](https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh)
 chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
-
 ```
 
 ---
