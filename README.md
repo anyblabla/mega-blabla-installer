@@ -1,44 +1,47 @@
 ## 📦 Mega-Blabla-Installer
 
-[**Français**](#français) | [**English**](#english)
+![Debian](https://img.shields.io/badge/OS-Debian-A81D33?logo=debian&logoColor=white)  
+![Bash](https://img.shields.io/badge/Shell-Bash-4EAA25?logo=gnubash&logoColor=white)  
+![Version](https://img.shields.io/badge/Status-Beta--0.1.7-orange)  
+![GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+
+[**Français**](#french) | [**English**](#english)
 
 ---
 
-<h2 id="français">🇫🇷 Français</h2>
+<h2 id="french">🇫🇷 Français</h2>
 
 **L'outil de post-installation ultime pour les techniciens et utilisateurs Debian.** Développé par **Amaury (Blabla Linux)**, ce script automatise l'installation de plus de **130 logiciels** sur Debian 11/12 (Stable) via une interface interactive.
 
 > [!IMPORTANT]
-> **Note sur la version Beta (v0.1.7)** : Ce script est actuellement en phase **Beta**. Il est pleinement fonctionnel mais sujet à des évolutions majeures (structure du code, enrichissement du catalogue). Vos retours sont précieux pour l'améliorer !
+> **Note sur la version Beta (v0.1.7)** : Ce script est actuellement en phase **Beta**. Il est pleinement fonctionnel mais sujet à des évolutions majeures (structure du code, enrichissement du catalogue). Vos retours sont précieux pour l'améliorer !  
 > **Nouveauté :** Le catalogue passe de 90 à plus de **130 logiciels** et intègre un **mode désinstallation**.
 
 > [!WARNING]
 > **Projet Passion** : Ce script est développé sur mon temps libre par pur plaisir de partage. Je ne suis tenu à aucun engagement ni calendrier précis concernant la sortie des nouvelles releases ou des futures fonctionnalités.
 
 ## 👨‍💻 À propos de l'auteur
-
-Administrateur système spécialisé dans le reconditionnement matériel sous Linux, je milite pour une informatique durable et libre. Ce script est le fruit de mon expertise sur le terrain pour faciliter le déploiement de stations de travail performantes et prêtes à l'emploi.
-
+Administrateur système spécialisé dans le reconditionnement matériel sous Linux, je milite pour une informatique durable et libre. Ce script est le fruit de mon expertise sur le terrain pour faciliter le déploiement de stations de travail performantes et prêtes à l'emploi.  
 👉 **Un seul lien :** [link.blablalinux.be](https://link.blablalinux.be)
 
 ## 🚀 Installation et Lancement
-
 Pour garantir une stabilité parfaite de l'interface graphique (**Whiptail**) et une prise en charge totale de votre clavier (touches fléchées et espace), le script doit être téléchargé et exécuté localement :
 
 ### Option 1 : Via GitHub (Recommandé)
-
 ```plaintext
-wget https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh
+wget [https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh](https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh)
 chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
+
 ```
 
 ### Option 2 : Via Gitea (Blabla Linux)
 
 ```plaintext
-wget https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh
+wget [https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh](https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh)
 chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
+
 ```
 
 ---
@@ -67,17 +70,19 @@ To ensure perfect stability of the graphical interface (**Whiptail**) and full s
 ### Option 1: Via GitHub (Recommended)
 
 ```plaintext
-wget https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh
+wget [https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh](https://raw.githubusercontent.com/anyblabla/mega-blabla-installer/main/mega-blabla-installer.sh)
 chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
+
 ```
 
 ### Option 2: Via Gitea (Blabla Linux)
 
 ```plaintext
-wget https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh
+wget [https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh](https://gitea.blablalinux.be/blablalinux/mega-blabla-installer/raw/branch/main/mega-blabla-installer.sh)
 chmod +x mega-blabla-installer.sh
 sudo ./mega-blabla-installer.sh
+
 ```
 
 ---
